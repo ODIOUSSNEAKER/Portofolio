@@ -1,8 +1,8 @@
 <?php
-$host_koneksi = "localhost:3307";
+$host_koneksi = "localhost:3306";
 $username_koneksi = "root";
 $password_koneksi = "";
-$database_koneksi = "db_portofolio";
+$database_koneksi = "portofolio";
 
 $koneksi = mysqli_connect(
     $host_koneksi,
