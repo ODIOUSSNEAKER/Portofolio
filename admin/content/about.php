@@ -1,3 +1,18 @@
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<?php
+$query = mysqli_query($koneksi, "SELECT * FROM about ORDER BY id DESC");
+
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+
+    $delete = mysqli_query($koneksi, "DELETE FROM about WHERE id = '$id'");
+    header("location:?pg=about&hapus-berhasil");
+}
+?>
+<div align="right" class="mb-3">
+    <a href="?pg=update-about" class="btn btn-primary">Update About</a>
+</div>
+
 <!-- ======= About Section ======= -->
 <section id="about" class="about">
     <div class="container">
@@ -41,6 +56,23 @@
                         </div>
                     </div>
                 </div>
+                <tbody>
+                    <?php $no = 1;
+                    while ($row = mysqli_fetch_assoc($query)) : ?>
+                        <tr>
+                            <td><?php echo $no++ ?></td>
+                            <td><?php echo $row['riwayat_pekerjaan'] ?></td>
+                            <td><?php echo $row['kepuasan_klien'] ?></td>
+                            <td><?php echo $row['proyek'] ?></td>
+                            <td><?php echo $row['pengalaman_kerja'] ?></td>
+                            <td>
+                                <a href="?pg=update-about&&edit=<?php echo $row['id'] ?>" class="btn btn-success"><box-icon name='pencil'></box-icon></a>
+                                <a onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" href=" ?pg=about&delete=<?php echo $row['id'] ?>" class="btn btn-danger"><box-icon type='solid' name='trash'></box-icon></a>
+                            </td>
+
+                        </tr>
+                    <?php endwhile ?>
+                </tbody>
             </div><!-- End .content-->
         </div>
     </div>
